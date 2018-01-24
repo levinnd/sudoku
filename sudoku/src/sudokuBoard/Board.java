@@ -312,4 +312,20 @@ public class Board {
 		
 		return builder.toString();
 	}
+
+	/**
+	 * Returns true if there are any nulls on the board.
+	 * Returns false if there is no empty space.
+	 * @return
+	 */
+	public boolean hasSpace() {
+		for(int i = 0; i< 9; i++){
+			for(int j = 0; j<9; j++){
+				if(board[i][j]==null){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
