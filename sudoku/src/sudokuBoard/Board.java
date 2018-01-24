@@ -294,4 +294,22 @@ public class Board {
 
 	}
 
+	@Override
+	public String toString(){
+		
+		StringBuilder builder = new StringBuilder();
+		
+		for(int i = 0; i<9; i++){
+			if(i!=0){
+				builder.append("\n");
+			}
+			builder.append("{ ");
+			for(int j = 0; j<9; j++){
+				builder.append("{"+board[i][j]+"}");
+			}
+			builder.append(" }");
+		}
+		
+		return builder.toString();
+	}
 }
