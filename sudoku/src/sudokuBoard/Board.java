@@ -20,9 +20,9 @@ public class Board {
 	 * Creates a board that has been prepopulated.
 	 * @param board
 	 */
-	public Board(Integer[][] board ){
-		this.backupBoard = board;
-		this.board = board;
+	public Board(Integer[][] input ){
+		backupBoard = input;
+		board = deepCopy(backupBoard);
 	}
 
 	public boolean placeNumber(int indexX, int indexY, int val){
@@ -37,11 +37,11 @@ public class Board {
 		
 		//Check if the board is legal. 
 		if(validate()){ // If the board is legal, back it up and return true
-			backupBoard = Arrays.copyOf(board, board.length);
+			backupBoard = deepCopy(board);
 			return true;
 		}
 		else{ //If the board is illegal, return it to its old state and return false;
-			board = Arrays.copyOf(backupBoard, backupBoard.length);
+			board = deepCopy(backupBoard);
 			return false;
 		}
 	}
@@ -286,8 +286,8 @@ public class Board {
 			throw new IllegalArgumentException("Illegal offsets: X:"+ offsetX + " Y: "+ offsetY);
 		}
 
-		for(int i = 0; i<4; i++){
-			for(int j = 0; j<4; j++){
+		for(int i = 0; i<3; i++){
+			for(int j = 0; j<3; j++){
 				box[i][j] = board[i+offsetX][j+offsetY];
 			}
 		}
@@ -303,11 +303,25 @@ public class Board {
 			if(i!=0){
 				builder.append("\n");
 			}
-			builder.append("{ ");
+
 			for(int j = 0; j<9; j++){
-				builder.append("{"+board[i][j]+"}");
+				
+				if(j%3==0){
+					builder.append("   ");
+				}
+				
+				if(board[i][j]!=null){
+					builder.append("{"+board[i][j]+"}");
+				}
+				else{
+					builder.append("{ }");
+				}
+				
+				if(j!=8 && j!=2 && j!=5){
+					builder.append(",");
+				}
 			}
-			builder.append(" }");
+
 		}
 		
 		return builder.toString();
@@ -319,6 +333,7 @@ public class Board {
 	 * @return
 	 */
 	public boolean hasSpace() {
+
 		for(int i = 0; i< 9; i++){
 			for(int j = 0; j<9; j++){
 				if(board[i][j]==null){
@@ -327,5 +342,17 @@ public class Board {
 			}
 		}
 		return false;
+	}
+	
+	private Integer[][] deepCopy(Integer[][] board){
+		Integer[][] output = new Integer[9][9];
+		
+		for(int i = 0; i<9; i++){
+			for(int j = 0; j<9; j++){
+				output[i][j] = board[i][j];
+			}
+		}
+		
+		return output;
 	}
 }
