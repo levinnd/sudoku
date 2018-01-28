@@ -10,6 +10,8 @@ public class Board {
 	private Integer[][] board = new Integer[9][9];
 
 	private Integer[][] backupBoard = new Integer[9][9];
+	
+	private boolean [][] editable = new boolean[9][9];
 
 	/**
 	 * Creates an empty board
@@ -23,13 +25,31 @@ public class Board {
 	public Board(Integer[][] input ){
 		backupBoard = deepCopy(input);
 		board = deepCopy(backupBoard);
+		
+		for(int i = 0; i<9; i++){
+			
+			for(int j = 0; j<9; j++ ){
+				if(board[i][j]!=null){
+					editable[i][j] = false;
+				}
+				else{
+					editable[i][j] = true;
+				}
+			}
+		}
 	}
 
-	public boolean placeNumber(int indexX, int indexY, int val){
+	public boolean placeNumber(Integer indexX, Integer indexY, Integer val){
 		
-		if(indexX<0 || indexY<0 || val<1 || indexX>8 || indexY>8 || val>9){
+		if(indexX<0 || indexY<0 || indexX>8 || indexY>8 || (val!=null && (val>9 || val<1))){
 			throw new IllegalArgumentException(" Bad input: indexX: "+ indexX + " indexY: "+ indexY +" val: "+ val);
 		}
+		
+		//Check to make sure its not one of the original numbers. If it is, don't let the user edit it.
+		if(!editable[indexY][indexX]){
+			return false;
+		}
+		
 		
 		board[indexY][indexX] = val;
 		
@@ -50,7 +70,7 @@ public class Board {
 		return board[y][x];
 	}
 	
-	private boolean validate(){
+	protected boolean validate(){
 
 		return verifyColumns() && verifyRows() && verifyBoxes();
 	}
@@ -348,7 +368,7 @@ public class Board {
 		return false;
 	}
 	
-	public static Integer[][] deepCopy(Integer[][] board){
+	protected static Integer[][] deepCopy(Integer[][] board){
 		Integer[][] output = new Integer[9][9];
 		
 		for(int i = 0; i<9; i++){
@@ -358,5 +378,28 @@ public class Board {
 		}
 		
 		return output;
+	}
+	
+	public Board makeCopy(){
+		
+		Integer[][] newBoard = deepCopy(board);
+		
+		return new Board(newBoard);
+		
+	}
+
+	public int getSpacesLeft() {
+		int count = 0;
+		
+		for(int i = 0; i<9; i++){
+			for(int j = 0; j<9; j++){
+				
+				if(getValue(i,j)==null){
+					count++;
+				}
+			}
+		}
+		return count;
+		
 	}
 }

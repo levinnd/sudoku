@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import sudokuBoard.Board;
 
-public class sample {
+public class SamplePlay {
 
 	public static void main(String args[]){
 

@@ -163,16 +163,32 @@ public class testBoard {
 	@Test
 	public void testPlaceNumber(){
 		Board board = new Board(puzzle);
+		
+		//Place a number that is in a row
 		assertTrue(!board.placeNumber(0, 0, 1));
 		assertEquals(null, board.getValue(0, 0));
+		
+		//Place a number that is in a column
+		assertTrue(!board.placeNumber(0, 0, 8));
+		assertEquals(null, board.getValue(0, 0));
+		
+		//Place a good number
 		assertTrue(board.placeNumber(0, 0, 4));
 		assertTrue(4==board.getValue(0, 0));
+		
+		//Place another good number
 		assertTrue(board.placeNumber(1, 0, 3));
 		assertTrue(3==board.getValue(1, 0));
-		assertTrue(!board.placeNumber(1, 0, 2));
-		assertTrue(3==board.getValue(1, 0));
+		
+		//Place a number that's bad for the box.
 		assertTrue(!board.placeNumber(8, 8, 7));
 		assertTrue(null==board.getValue(8, 8));
+		
+		//Erase number
+		assertTrue(board.placeNumber(0, 0, null));
+		assertEquals(null,board.getValue(0, 0));
+		
+		//If this fails, you can rewrite the board right now. 
 		assertTrue(!board.placeNumber(0, 1, 2));
 		assertTrue(6==board.getValue(0, 1));
 	}
