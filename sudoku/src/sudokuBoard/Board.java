@@ -21,7 +21,7 @@ public class Board {
 	 * @param board
 	 */
 	public Board(Integer[][] input ){
-		backupBoard = input;
+		backupBoard = deepCopy(input);
 		board = deepCopy(backupBoard);
 	}
 
@@ -31,7 +31,7 @@ public class Board {
 			throw new IllegalArgumentException(" Bad input: indexX: "+ indexX + " indexY: "+ indexY +" val: "+ val);
 		}
 		
-		board[indexX][indexY] = val;
+		board[indexY][indexX] = val;
 		
 		//TODO: How the board should respond based on validation still needs to be defined. This is a placeholder.
 		
@@ -44,6 +44,10 @@ public class Board {
 			board = deepCopy(backupBoard);
 			return false;
 		}
+	}
+	
+	protected Integer getValue(int x, int  y){
+		return board[y][x];
 	}
 	
 	private boolean validate(){
@@ -81,10 +85,7 @@ public class Board {
 				//If we have the same number of numbers as our set size, that means
 				//that each number only appeared once, so its valid. Otherwise there's
 				//a duplicate.
-				if(count == set.size()){
-					return true;
-				}
-				else{
+				if(count != set.size()){
 					return false;
 				}
 			}
@@ -134,35 +135,35 @@ public class Board {
 	}
 
 	/**
-	 * Returns the column at the specified index, 0 to 8.
-	 * @param index
-	 * @return the column
-	 */
-	private Integer[] getColumn(int index){
-
-		Integer[] col = new Integer[9];
-
-		for(int i = 0; i< 9; i++){
-			col[i] = board[index][i];
-		}
-
-		return col;
-	}
-
-	/**
 	 * Returns the row at the specified index, 0 to 8.
 	 * @param index
 	 * @return the row
 	 */
-	private Integer[] getRow(int index){
+	protected Integer[] getRow(int index){
 
 		Integer[] row = new Integer[9];
 
 		for(int i = 0; i< 9; i++){
-			row[i] = board[i][index];
+			row[i] = board[index][i];
 		}
 
 		return row;
+	}
+
+	/**
+	 * Returns the column at the specified index, 0 to 8.
+	 * @param index
+	 * @return the column
+	 */
+	protected Integer[] getColumn(int index){
+
+		Integer[] column = new Integer[9];
+
+		for(int i = 0; i< 9; i++){
+			column[i] = board[i][index];
+		}
+
+		return column;
 	}
 
 	/**
@@ -173,7 +174,7 @@ public class Board {
 	 * @param y
 	 * @return the box
 	 */
-	private Integer[][] getBox(int x, int y){
+	protected Integer[][] getBox(int x, int y){
 
 		Integer[][] box = new Integer[3][3];
 
@@ -185,7 +186,7 @@ public class Board {
 		int offsetX;
 		int offsetY;
 
-		if(x<4 && y<4){
+		if(x<3 && y<3){
 			offsetX = 0;
 			offsetY = 0;
 		}
@@ -195,7 +196,7 @@ public class Board {
 		 * o|o|o
 		 * o|o|o
 		 */
-		else if(x>3 && x<7 && y<4){
+		else if(x>2 && x<6 && y<3){
 			offsetX = 3;
 			offsetY = 0;
 		}
@@ -205,7 +206,7 @@ public class Board {
 		 * o|o|o
 		 * o|o|o
 		 */
-		else if(x>6 && y<4){
+		else if(x>5 && y<3){
 			offsetX = 6;
 			offsetY = 0;
 		}
@@ -214,7 +215,7 @@ public class Board {
 		 * x|o|o
 		 * o|o|o
 		 */
-		else if(x>3 && x<7 && y<4){
+		else if(x<3 && y>2 && y<6){
 			offsetX = 0;
 			offsetY = 3;
 		}
@@ -223,7 +224,7 @@ public class Board {
 		 * o|x|o
 		 * o|o|o
 		 */
-		else if(x>3 && x<7 && y<4){
+		else if(x>2 && x<6 &&  y>2 && y<6){
 			offsetX = 3;
 			offsetY = 3;
 		}
@@ -232,7 +233,7 @@ public class Board {
 		 * o|o|x
 		 * o|o|o
 		 */
-		else if(x>3 && x<7 && y<4){
+		else if(x>5 &&  y>2 && y<6){
 			offsetX = 6;
 			offsetY = 3;
 		}
@@ -241,7 +242,7 @@ public class Board {
 		 * o|o|o
 		 * x|o|o
 		 */
-		else if(x>3 && x<7 && y<4){
+		else if(x<3 && y>5){
 			offsetX = 0;
 			offsetY = 6;
 		}
@@ -250,7 +251,7 @@ public class Board {
 		 * o|o|o
 		 * o|x|o
 		 */
-		else if(x>3 && x<7 && y<4){
+		else if(x>2 && x<6 && y>5){
 			offsetX = 3;
 			offsetY = 6;
 		}
@@ -259,7 +260,7 @@ public class Board {
 		 * o|o|o
 		 * o|o|x
 		 */
-		else if(x>3 && x<7 && y<4){
+		else if(x>5 && y>5){
 			offsetX = 6;
 			offsetY = 6;
 		}
@@ -280,7 +281,7 @@ public class Board {
 	 * @param offsetX
 	 * @param offsetY
 	 */
-	private void populateBox(Integer[][] box, int offsetX, int offsetY) {
+	protected void populateBox(Integer[][] box, int offsetX, int offsetY) {
 
 		if(offsetX%3!=0 || offsetY%3!=0 || offsetX>8 || offsetX<0 || offsetY>8 || offsetY<0){
 			throw new IllegalArgumentException("Illegal offsets: X:"+ offsetX + " Y: "+ offsetY);
@@ -288,7 +289,7 @@ public class Board {
 
 		for(int i = 0; i<3; i++){
 			for(int j = 0; j<3; j++){
-				box[i][j] = board[i+offsetX][j+offsetY];
+				box[i][j] = board[i+offsetY][j+offsetX];
 			}
 		}
 
@@ -301,6 +302,9 @@ public class Board {
 		
 		for(int i = 0; i<9; i++){
 			if(i!=0){
+				builder.append("\n");
+			}
+			if((i)%3==0){
 				builder.append("\n");
 			}
 
@@ -344,7 +348,7 @@ public class Board {
 		return false;
 	}
 	
-	private Integer[][] deepCopy(Integer[][] board){
+	public static Integer[][] deepCopy(Integer[][] board){
 		Integer[][] output = new Integer[9][9];
 		
 		for(int i = 0; i<9; i++){

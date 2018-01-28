@@ -20,7 +20,7 @@ public class sample {
 
 			{null,null,   9,      3,null,null,   null,   7,   4},
 			{null,   4,null,   null,   5,null,   null,   3,   6},
-			{null,null,   3,   null,   1,   8,   null,null,null},
+			{null,null,   3,   null,   1,   8,   null,null,null}
 
 		};
 
