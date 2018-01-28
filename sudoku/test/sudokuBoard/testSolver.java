@@ -59,13 +59,30 @@ public class testSolver {
 		System.out.println("Puzzle\n");
 		System.out.println(board.toString()+"\n\n");
 		
-		assertTrue(solver.solve(board,0));
+		assertTrue(solver.solve(board));
 		
 		System.out.println("Solution\n");
 		System.out.println(solved.toString());
 		
-		assertEquals(solution, solver.getSolvedBoard());
+		assertEquals(solved.toString(), solver.getSolvedBoard().toString());
 		
+	}
+	
+	@Test
+	public void testGetSpaceLocation(){
+		Solver solver = new Solver();
+		
+		Board board = new Board(puzzle);
+		
+		int[] xy = solver.findBlankValue(board);
+		assertArrayEquals(new int[]{0,0},xy);
+		
+		board.placeNumber(0, 0, 4);
+		board.placeNumber(1, 0, 3);
+		board.placeNumber(2, 0, 5);
+		
+		xy = solver.findBlankValue(board);
+		assertArrayEquals(new int[]{5,0},xy);
 	}
 	
 	
