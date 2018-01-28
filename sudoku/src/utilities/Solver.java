@@ -1,4 +1,6 @@
-package sudokuBoard;
+package utilities;
+
+import sudokuBoard.Board;
 
 public class Solver {
 

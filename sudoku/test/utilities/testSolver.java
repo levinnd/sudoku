@@ -1,9 +1,12 @@
-package sudokuBoard;
+package utilities;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import sudokuBoard.Board;
+import utilities.Solver;
 
 public class testSolver {
 

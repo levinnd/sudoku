@@ -66,11 +66,11 @@ public class Board {
 		}
 	}
 	
-	protected Integer getValue(int x, int  y){
+	public Integer getValue(int x, int  y){
 		return board[y][x];
 	}
 	
-	protected boolean validate(){
+	public boolean validate(){
 
 		return verifyColumns() && verifyRows() && verifyBoxes();
 	}
