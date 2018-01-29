@@ -16,7 +16,13 @@ public class Board {
 	/**
 	 * Creates an empty board
 	 */
-	public Board(){}
+	public Board(){
+		for(int i=0; i<9; i++){
+			for(int j=0; j<9; j++){
+				editable[i][j]=true;
+			}
+		}
+	}
 
 	/**
 	 * Creates a board that has been prepopulated.
@@ -39,19 +45,19 @@ public class Board {
 		}
 	}
 
-	public boolean placeNumber(Integer indexX, Integer indexY, Integer val){
+	public boolean placeNumber(Integer x, Integer y, Integer val){
 		
-		if(indexX<0 || indexY<0 || indexX>8 || indexY>8 || (val!=null && (val>9 || val<1))){
-			throw new IllegalArgumentException(" Bad input: indexX: "+ indexX + " indexY: "+ indexY +" val: "+ val);
+		if(x<0 || y<0 || x>8 || y>8 || (val!=null && (val>9 || val<1))){
+			throw new IllegalArgumentException(" Bad input: indexX: "+ x + " indexY: "+ y +" val: "+ val);
 		}
 		
 		//Check to make sure its not one of the original numbers. If it is, don't let the user edit it.
-		if(!editable[indexY][indexX]){
+		if(!editable[y][x]){
 			return false;
 		}
 		
 		
-		board[indexY][indexX] = val;
+		board[y][x] = val;
 		
 		//TODO: How the board should respond based on validation still needs to be defined. This is a placeholder.
 		
