@@ -44,6 +44,12 @@ public class Board {
 			}
 		}
 	}
+	
+	public Board(Integer[][] input, boolean[][] editInput){
+		board = deepCopy(input);
+		backupBoard = deepCopy(input);
+		this.editable = deepCopy(editInput);
+	}
 
 	public boolean placeNumber(Integer x, Integer y, Integer val){
 		
@@ -386,11 +392,24 @@ public class Board {
 		return output;
 	}
 	
+	protected static boolean[][] deepCopy(boolean[][] board){
+		boolean[][] output = new boolean[9][9];
+		
+		for(int i = 0; i<9; i++){
+			for(int j = 0; j<9; j++){
+				output[i][j] = board[i][j];
+			}
+		}
+		
+		return output;
+	}
+	
 	public Board makeCopy(){
 		
 		Integer[][] newBoard = deepCopy(board);
+		boolean[][] editBoard = deepCopy(editable);
 		
-		return new Board(newBoard);
+		return new Board(newBoard, editBoard);
 		
 	}
 
@@ -454,7 +473,7 @@ public class Board {
 		}
 		
 		if(this.hashCode()!=obj.hashCode()){
-			return false;
+//			return false;
 		}
 		
 		Board otherBoard = (Board) obj;

@@ -14,6 +14,10 @@ public class BoardWriter {
 		this.file = file;
 	}
 	
+	public void setFile(File file){
+		this.file = file;
+	}
+	
 	public void writeBoard(Board board){
 		
 		try(PrintWriter writer = new PrintWriter(file);) {
@@ -27,7 +31,7 @@ public class BoardWriter {
 		
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			throw new IllegalStateException("This should never happen with PrintWriter");
+			throw new IllegalStateException("The path to the file was missing");
 		}
 		
 	}

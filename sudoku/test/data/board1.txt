@@ -1,0 +1,25 @@
+
+   { },{ },{ }   {2},{6},{ }   {7},{ },{1}
+   {6},{8},{ }   { },{7},{ }   { },{9},{ }
+   {1},{9},{ }   { },{ },{4}   {5},{ },{ }
+
+   {8},{2},{ }   {1},{ },{ }   { },{4},{ }
+   { },{ },{4}   {6},{ },{2}   {9},{ },{ }
+   { },{5},{ }   { },{ },{3}   { },{2},{8}
+
+   { },{ },{9}   {3},{ },{ }   { },{7},{4}
+   { },{4},{ }   { },{5},{ }   { },{3},{6}
+   { },{ },{3}   { },{1},{8}   { },{ },{ }
+&&
+
+   {true},{true},{true}   {false},{false},{true}   {false},{true},{false}
+   {false},{false},{true}   {true},{false},{true}   {true},{false},{true}
+   {false},{false},{true}   {true},{true},{false}   {false},{true},{true}
+
+   {false},{false},{true}   {false},{true},{true}   {true},{false},{true}
+   {true},{true},{false}   {false},{true},{false}   {false},{true},{true}
+   {true},{false},{true}   {true},{true},{false}   {true},{false},{false}
+
+   {true},{true},{false}   {false},{true},{true}   {true},{false},{false}
+   {true},{false},{true}   {true},{false},{true}   {true},{false},{false}
+   {true},{true},{false}   {true},{false},{false}   {true},{true},{true}
