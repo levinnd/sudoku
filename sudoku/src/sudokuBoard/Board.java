@@ -408,4 +408,34 @@ public class Board {
 		return count;
 		
 	}
+
+	public String getEditableBoxAsString() {
+		
+		StringBuilder builder = new StringBuilder();
+		
+		for(int i = 0; i<9; i++){
+			if(i!=0){
+				builder.append("\n");
+			}
+			if((i)%3==0){
+				builder.append("\n");
+			}
+
+			for(int j = 0; j<9; j++){
+				
+				if(j%3==0){
+					builder.append("   ");
+				}
+				
+				builder.append("{"+editable[i][j]+"}");
+				
+				if(j!=8 && j!=2 && j!=5){
+					builder.append(",");
+				}
+			}
+
+		}
+		
+		return builder.toString();
+	}
 }
