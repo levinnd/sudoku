@@ -192,4 +192,28 @@ public class testBoard {
 		assertTrue(!board.placeNumber(0, 1, 2));
 		assertTrue(6==board.getValue(0, 1));
 	}
+	
+	@Test
+	public void testEquals(){
+		
+		Board board = new Board(puzzle);
+		
+		Board board2 = new Board(solution);
+		
+		Board board3 = board.makeCopy();
+		
+		Board board4 = board2.makeCopy();
+		
+		assertEquals(board, board);
+		
+		assertEquals(board2, board2);
+		
+		assertEquals(board, board3);
+		
+		assertEquals(board2, board4);
+		
+		assertNotEquals(board, board2);
+		
+		assertNotEquals(board3, board4);
+	}
 }

@@ -442,11 +442,7 @@ public class Board {
 	@Override
 	public int hashCode(){
 		
-		int out = board.hashCode()*2 
-				+ backupBoard.hashCode()*3 
-				+ editable.hashCode()*5;
-		
-		return out;
+		return Arrays.deepHashCode(board)*2 + Arrays.deepHashCode(backupBoard)*3 + Arrays.deepHashCode(editable)*5;
 		
 	}
 	
