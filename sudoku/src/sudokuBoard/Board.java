@@ -438,4 +438,38 @@ public class Board {
 		
 		return builder.toString();
 	}
+	
+	@Override
+	public int hashCode(){
+		
+		int out = board.hashCode()*2 
+				+ backupBoard.hashCode()*3 
+				+ editable.hashCode()*5;
+		
+		return out;
+		
+	}
+	
+	@Override
+	public boolean equals(Object obj){
+		
+		if (this.getClass()!= obj.getClass()){
+			return false;
+		}
+		
+		if(this.hashCode()!=obj.hashCode()){
+			return false;
+		}
+		
+		Board otherBoard = (Board) obj;
+		
+		//Check contents
+		if(this.toString().equals(otherBoard.toString()) &&
+			this.getEditableBoxAsString().equals(otherBoard.getEditableBoxAsString())) {
+			return true;
+		}
+		
+		return false;
+
+	}
 }
