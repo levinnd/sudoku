@@ -280,6 +280,13 @@ public class MainUI {
 	private Button loadButton;
 
 	private Stage stage;
+	
+	private Mode mode = Mode.ENABLED; 
+	
+	enum Mode{
+		DISABLED,
+		ENABLED;
+	}
 
 	@FXML
 	void checkMyValuesButtonPressed(ActionEvent event) {

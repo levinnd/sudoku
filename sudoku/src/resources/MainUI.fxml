@@ -16,7 +16,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="726.0" prefWidth="1249.0" VBox.vgrow="ALWAYS">
       <children>
-            <GridPane layoutX="24.0" layoutY="9.0" prefHeight="720.0" prefWidth="1232.0">
+            <GridPane layoutX="32.0" layoutY="27.0" prefHeight="720.0" prefWidth="1232.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="10.0" prefWidth="140.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="174.0" />
@@ -266,7 +266,6 @@
                      <children>
                         <Button fx:id="checkButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#checkMyValuesButtonPressed" prefHeight="50.0" prefWidth="130.0" text="Check My Values" textAlignment="RIGHT" GridPane.halignment="RIGHT" />
                         <Button fx:id="hintButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#hintButtonPressed" prefHeight="48.0" prefWidth="130.0" text="Hint" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                        <Button fx:id="NewButton" mnemonicParsing="false" onAction="#chooseANewPuzzlePressed" prefHeight="48.0" prefWidth="130.0" text="Choose a New Puzzle" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <GridPane GridPane.columnIndex="4" GridPane.rowIndex="2">
@@ -279,8 +278,9 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="48.0" prefWidth="127.0" text="Save" />
-                        <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadButtonPressed" prefHeight="48.0" prefWidth="127.0" text="Load" GridPane.rowIndex="1" />
+                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="48.0" prefWidth="127.0" text="Save Session" GridPane.rowIndex="1" />
+                        <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadButtonPressed" prefHeight="48.0" prefWidth="127.0" text="Load Session" GridPane.rowIndex="2" />
+                        <Button fx:id="NewButton" mnemonicParsing="false" onAction="#chooseANewPuzzlePressed" prefHeight="48.0" prefWidth="130.0" text="Choose a New Puzzle" GridPane.halignment="LEFT" />
                      </children>
                   </GridPane>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="881.0" text="Add a Value to the Square" textAlignment="CENTER" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
