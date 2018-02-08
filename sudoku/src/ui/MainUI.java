@@ -1,10 +1,17 @@
 package ui;
 
+import java.io.File;
+
+import io.BoardReader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import sudokuBoard.Board;
 
 public class MainUI {
@@ -270,6 +277,8 @@ public class MainUI {
     @FXML
     private Button loadButton;
 
+	private Stage stage;
+
     @FXML
 	void checkMyValuesButtonPressed(ActionEvent event) {
 
@@ -287,7 +296,13 @@ public class MainUI {
 
 	@FXML
 	void loadButtonPressed(ActionEvent event) {
-
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Puzzle file");
+		File file = fileChooser.showOpenDialog(stage);
+		
+		BoardReader reader = new BoardReader(file);
+		Board board = reader.read();
+		loadData(board);
 	}
 
 	@FXML
@@ -295,12 +310,30 @@ public class MainUI {
 
 	}
     
+	//TODO: Going to get rid of this and use events
+	public void passInStage(Stage stage){
+		this.stage = stage;
+	}
+	
     public void loadData(Board board){
     	
     	for(int y = 0; y<9; y++){
     		for(int x = 0; x<9; x++){
-    			TextArea area = (TextArea) root.lookup("box"+y+x);
-    			area.setText(board.getValue(x, y).toString());
+    			
+    			//I'm using the fx lookup to find the box I want.
+    			//Otherwise this would be a nightmare.
+    			TextArea area = (TextArea) root.lookup("#box"+y+x);
+    			Integer val = board.getValue(x, y);
+    			if(val==null){
+    				area.clear();
+    			}
+    			else{
+    				area.setText(board.getValue(x, y)+"");
+    			}
+    			
+    			//Make sure non editable stuff is not editable
+    			area.setEditable(board.isEditable(x,y));
+    			area.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
     		}
     	}
     	

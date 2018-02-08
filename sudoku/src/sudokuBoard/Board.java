@@ -487,4 +487,9 @@ public class Board {
 		return false;
 
 	}
+
+	public boolean isEditable(int x, int y) {
+		return editable[y][x];
+		
+	}
 }

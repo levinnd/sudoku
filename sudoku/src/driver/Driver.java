@@ -2,8 +2,6 @@
 package driver;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,7 +21,8 @@ public class Driver extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/MainUI.fxml"));
 		Parent root = loader.load();
 		controller = loader.getController();
-
+		controller.passInStage(stage);
+		
 		stage.setTitle("FXML Welcome");
 		stage.setScene(new Scene(root, 300, 275));
 		stage.show();

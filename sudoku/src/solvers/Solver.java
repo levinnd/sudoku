@@ -1,4 +1,4 @@
-package utilities;
+package solvers;
 
 import java.util.Random;
 

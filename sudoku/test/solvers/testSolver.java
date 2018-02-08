@@ -1,12 +1,13 @@
-package utilities;
+package solvers;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import solvers.MultiSolver;
+import solvers.Solver;
 import sudokuBoard.Board;
-import utilities.Solver;
 
 public class testSolver {
 

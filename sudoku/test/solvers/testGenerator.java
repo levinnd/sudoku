@@ -1,8 +1,10 @@
-package utilities;
+package solvers;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import solvers.Generator;
 
 public class testGenerator {
 
