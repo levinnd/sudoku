@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainUI">
+  <children>
+<VBox prefHeight="400.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="726.0" prefWidth="1249.0" VBox.vgrow="ALWAYS">
+      <children>
+            <GridPane layoutX="24.0" layoutY="9.0" prefHeight="720.0" prefWidth="1232.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="356.0" minWidth="10.0" prefWidth="140.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="174.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="876.0" minWidth="10.0" prefWidth="637.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="457.0" minWidth="0.0" prefWidth="145.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="457.0" minWidth="10.0" prefWidth="137.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="458.0" minHeight="10.0" prefHeight="458.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="191.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="69.33331298828125" minHeight="0.0" prefHeight="19.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <GridPane prefHeight="201.0" prefWidth="638.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="433.0" minWidth="10.0" prefWidth="258.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="503.0" minWidth="0.0" prefWidth="254.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="347.0" minWidth="10.0" prefWidth="258.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints />
+                    </rowConstraints>
+                     <children>
+                        <GridPane style="-fx-border-color: black;">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TextArea fx:id="box00" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" />
+                              <TextArea fx:id="box01" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" />
+                              <TextArea fx:id="box02" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" />
+                              <TextArea fx:id="box10" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box11" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box12" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box20" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box21" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box22" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <GridPane style="-fx-border-color: black;" GridPane.columnIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextArea fx:id="box03" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" />
+                              <TextArea fx:id="box13" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box23" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box14" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box04" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" />
+                              <TextArea fx:id="box24" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box05" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" />
+                              <TextArea fx:id="box15" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box25" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <GridPane style="-fx-border-color: black;" GridPane.columnIndex="2">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextArea fx:id="box16" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box26" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box07" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" />
+                              <TextArea fx:id="box17" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box27" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box08" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" />
+                              <TextArea fx:id="box18" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box28" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box06" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" />
+                           </children>
+                        </GridPane>
+                        <GridPane style="-fx-border-color: black;" GridPane.rowIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextArea fx:id="box30" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" />
+                              <TextArea fx:id="box31" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" />
+                              <TextArea fx:id="box32" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" />
+                              <TextArea fx:id="box40" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box41" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box42" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box50" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box51" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box52" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <GridPane style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextArea fx:id="box33" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" />
+                              <TextArea fx:id="box34" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" />
+                              <TextArea fx:id="box43" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box44" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box35" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" />
+                              <TextArea fx:id="box45" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box53" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box54" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box55" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <GridPane prefHeight="67.0" prefWidth="198.0" style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextArea fx:id="box36" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" />
+                              <TextArea fx:id="box37" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" />
+                              <TextArea fx:id="box38" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" />
+                              <TextArea fx:id="box46" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box48" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box47" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box56" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box57" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box58" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <GridPane style="-fx-border-color: black;" GridPane.rowIndex="2">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextArea fx:id="box60" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" />
+                              <TextArea fx:id="box61" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" />
+                              <TextArea fx:id="box62" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" />
+                              <TextArea fx:id="box70" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box71" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box72" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box81" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box82" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box80" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <GridPane style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextArea fx:id="box63" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" />
+                              <TextArea fx:id="box64" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" />
+                              <TextArea fx:id="box73" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box74" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box83" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box84" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box65" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" />
+                              <TextArea fx:id="box75" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box85" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <GridPane style="-fx-border-color: black;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <TextArea fx:id="box66" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" />
+                              <TextArea fx:id="box76" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box86" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box67" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" />
+                              <TextArea fx:id="box77" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box87" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextArea fx:id="box68" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" />
+                              <TextArea fx:id="box78" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextArea fx:id="box88" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
+                  <GridPane alignment="TOP_RIGHT" GridPane.rowIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="checkButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#checkMyValuesButtonPressed" prefHeight="50.0" prefWidth="130.0" text="Check My Values" textAlignment="RIGHT" GridPane.halignment="RIGHT" />
+                        <Button fx:id="hintButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#hintButtonPressed" prefHeight="48.0" prefWidth="130.0" text="Hint" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                        <Button fx:id="NewButton" mnemonicParsing="false" onAction="#chooseANewPuzzlePressed" prefHeight="48.0" prefWidth="130.0" text="Choose a New Puzzle" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <GridPane GridPane.columnIndex="4" GridPane.rowIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveButtonPressed" prefHeight="48.0" prefWidth="127.0" text="Save" />
+                        <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadButtonPressed" prefHeight="48.0" prefWidth="127.0" text="Load" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="881.0" text="Add a Value to the Square" textAlignment="CENTER" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="RIGHT" prefHeight="98.0" prefWidth="186.0" text="SUDOKU" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                     <font>
+                        <Font name="Playbill" size="96.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
+  </children>
+</AnchorPane>
