@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -269,6 +270,31 @@ public class MainUI {
     @FXML
     private Button loadButton;
 
+    @FXML
+	void checkMyValuesButtonPressed(ActionEvent event) {
+
+	}
+
+	@FXML
+	void chooseANewPuzzlePressed(ActionEvent event) {
+
+	}
+
+	@FXML
+	void hintButtonPressed(ActionEvent event) {
+
+	}
+
+	@FXML
+	void loadButtonPressed(ActionEvent event) {
+
+	}
+
+	@FXML
+	void saveButtonPressed(ActionEvent event) {
+
+	}
+    
     public void loadData(Board board){
     	
     	for(int y = 0; y<9; y++){
@@ -279,5 +305,7 @@ public class MainUI {
     	}
     	
     }
+    
+    
     
 }

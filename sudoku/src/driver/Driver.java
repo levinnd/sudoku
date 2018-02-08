@@ -29,30 +29,7 @@ public class Driver extends Application {
 		stage.show();
 	}
 
-	@FXML
-	void checkMyValuesButtonPressed(ActionEvent event) {
-
-	}
-
-	@FXML
-	void chooseANewPuzzlePressed(ActionEvent event) {
-
-	}
-
-	@FXML
-	void hintButtonPressed(ActionEvent event) {
-
-	}
-
-	@FXML
-	void loadButtonPressed(ActionEvent event) {
-
-	}
-
-	@FXML
-	void saveButtonPressed(ActionEvent event) {
-
-	}
+	
 
 }
 
