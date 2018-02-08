@@ -5,6 +5,12 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
+/**
+ * This class is used to figure out whether or not the regexes are working.
+ * I generated the regex and test code from https://txt2re.com/, and made modifications
+ * to adjust for my use case. Because I hate regexes, like all good citizens.
+ *
+ */
 public class TestRegEx {
 
 	@Test
