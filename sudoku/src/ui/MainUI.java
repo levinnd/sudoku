@@ -355,10 +355,10 @@ public class MainUI {
 				//Make sure non editable stuff is not editable
 				area.setEditable(board.isEditable(x,y));
 				if(board.isEditable(x, y)){
-					area.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+					area.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 				}
 				else{
-					area.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+					area.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 				}
 			}
 		}
