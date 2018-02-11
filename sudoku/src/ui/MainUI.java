@@ -2,6 +2,8 @@ package ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.BoardReader;
 import io.BoardWriter;
@@ -90,8 +92,13 @@ public class MainUI {
 		fileChooser.setInitialDirectory(new File("./session/"));
 		File file = fileChooser.showSaveDialog(stage);
 
+		if(file==null){
+			System.out.println("File was null");
+			return;
+		}
+		
 		BoardWriter writer = new BoardWriter(file);
-		Board board = new Board();
+		Board board = getBoardFromUI();
 		
 		try {
 			writer.writeBoard(board, false);
@@ -105,6 +112,36 @@ public class MainUI {
 		
 	}
 
+	/**
+	 * Constructs the board from the UI.
+	 * @return
+	 */
+	private Board getBoardFromUI() {
+		
+		Integer[][] data = new Integer[9][9];
+		boolean[][] edit = new boolean[9][9];
+		
+		for(int y = 0; y<9; y++){
+			for(int x = 0; x<9; x++){
+
+				TextArea area = (TextArea) root.lookup("#box"+y+x);
+
+				String val = area.getText();
+				
+				if(val==null || val.isEmpty()){
+					data[y][x] = null;
+				}
+				else{
+					data[y][x] = Integer.valueOf(val);
+				}
+				
+				edit[y][x] = area.isEditable();
+			}
+		}
+		
+		return new Board(data, edit);
+	}
+
 	public void initialize(Stage stage){
 		this.stage = stage;
 		setupFormatters();
@@ -112,14 +149,18 @@ public class MainUI {
 	
 	public void setupFormatters(){
 
+		Pattern p = Pattern.compile("^(?:[1-9])$|");
+		
 		for(int y = 0; y<9; y++){
 			for(int x = 0; x<9; x++){
 
 				TextArea area = (TextArea) root.lookup("#box"+y+x);
-
 				area.setTextFormatter(new TextFormatter<String>((Change change) -> {
+					
 					String newText = change.getControlNewText();
-					if (newText.length() > 1) {
+					Matcher m = p.matcher(newText);
+
+					if (!m.matches()) {
 						return null ;
 					} else {
 						return change ;
