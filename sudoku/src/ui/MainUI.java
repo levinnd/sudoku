@@ -88,7 +88,7 @@ public class MainUI {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save Session file");
 		fileChooser.setInitialDirectory(new File("./session/"));
-		File file = fileChooser.showOpenDialog(stage);
+		File file = fileChooser.showSaveDialog(stage);
 
 		BoardWriter writer = new BoardWriter(file);
 		Board board = new Board();
@@ -99,7 +99,7 @@ public class MainUI {
 	        Alert alert = new Alert(AlertType.ERROR);
 	        alert.setTitle("Error: Could Not Write File");
 	        alert.setHeaderText("The session file could not be saved at "+ file.toString()+".");
-	        alert.setContentText("The session file could not be saved at "+ file.toString()+". It already exists adn is write-protected");
+	        alert.setContentText("The session file could not be saved at "+ file.toString()+". It already exists and is write-protected.");
 	        alert.showAndWait();
 		}
 		
