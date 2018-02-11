@@ -34,8 +34,6 @@ public class BoardReader {
 		try(Scanner scanner = new Scanner(file);){
 			int j = 0;
 
-			scanner.nextLine();
-
 			while(scanner.hasNextLine() && j<9){
 				String line = scanner.nextLine();
 

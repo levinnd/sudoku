@@ -1,6 +1,7 @@
 package io;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +50,7 @@ public class TestWriter {
 	}
 	
 	@Test
-	public void testWriter(){
+	public void testWriter() throws IOException{
 		
 		Board board = new Board(puzzle);
 		Board board2 = new Board(solution);
@@ -58,10 +59,10 @@ public class TestWriter {
 		File file2 = new File("./test/data/board2.txt");
 		
 		BoardWriter writer = new BoardWriter(file);
-		writer.writeBoard(board);
+		writer.writeBoard(board, false);
 		
 		writer.setFile(file2);
-		writer.writeBoard(board2);
+		writer.writeBoard(board2, false);
 	}
 	
 }

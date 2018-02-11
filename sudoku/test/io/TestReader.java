@@ -3,6 +3,7 @@ package io;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +52,7 @@ public class TestReader {
 	}
 	
 	@Test
-	public void testReader(){
+	public void testReader() throws IOException{
 		
 		Board board = new Board(puzzle);
 		Board board2 = new Board(solution);
@@ -60,10 +61,10 @@ public class TestReader {
 		File file2 = new File("./test/data/board2.txt");
 		
 		BoardWriter writer = new BoardWriter(file);
-		writer.writeBoard(board);
+		writer.writeBoard(board, false);
 		
 		writer.setFile(file2);
-		writer.writeBoard(board2);
+		writer.writeBoard(board2, false);
 		
 		BoardReader reader = new BoardReader(file);
 		
