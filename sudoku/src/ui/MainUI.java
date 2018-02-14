@@ -2,6 +2,8 @@ package ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +22,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import solvers.Solver;
 import sudokuBoard.Board;
+import sudokuBoard.Coord;
 
 public class MainUI {
 
@@ -53,7 +57,31 @@ public class MainUI {
 
 	@FXML
 	void checkMyValuesButtonPressed(ActionEvent event) {
-
+		
+		Board board = getBoardFromUI();
+		Set<Coord> vals = board.findInvalids();
+		
+		for(Coord val : vals){
+			TextArea area = (TextArea) root.lookup("#box"+val.getY()+val.getX());
+			 area.setStyle( "-fx-background-color: red" );
+		}
+		
+	}
+	
+	void solve(ActionEvent event) {
+		Board board = getBoardFromUI();
+		
+		Solver solver = new Solver();
+		
+		boolean result = solver.solve(board);
+		
+		//If we solve it, load it.
+		if(result){
+			loadData(board);
+		}
+		else{ //Otherwise, find out what's wrong and tell the user.
+			checkMyValuesButtonPressed(null);
+		}
 	}
 
 	@FXML

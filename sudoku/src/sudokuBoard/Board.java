@@ -1,5 +1,6 @@
 package sudokuBoard;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +11,7 @@ public class Board {
 	private Integer[][] board = new Integer[9][9];
 
 	private Integer[][] backupBoard = new Integer[9][9];
-	
+
 	private boolean [][] editable = new boolean[9][9];
 
 	/**
@@ -31,9 +32,9 @@ public class Board {
 	public Board(Integer[][] input ){
 		backupBoard = deepCopy(input);
 		board = deepCopy(backupBoard);
-		
+
 		for(int i = 0; i<9; i++){
-			
+
 			for(int j = 0; j<9; j++ ){
 				if(board[i][j]!=null){
 					editable[i][j] = false;
@@ -44,7 +45,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public Board(Integer[][] input, boolean[][] editInput){
 		board = deepCopy(input);
 		backupBoard = deepCopy(input);
@@ -52,21 +53,21 @@ public class Board {
 	}
 
 	public boolean placeNumber(Integer x, Integer y, Integer val){
-		
+
 		if(x<0 || y<0 || x>8 || y>8 || (val!=null && (val>9 || val<1))){
 			throw new IllegalArgumentException(" Bad input: indexX: "+ x + " indexY: "+ y +" val: "+ val);
 		}
-		
+
 		//Check to make sure its not one of the original numbers. If it is, don't let the user edit it.
 		if(!editable[y][x]){
 			return false;
 		}
-		
-		
+
+
 		board[y][x] = val;
-		
+
 		//TODO: How the board should respond based on validation still needs to be defined. This is a placeholder.
-		
+
 		//Check if the board is legal. 
 		if(validate()){ // If the board is legal, back it up and return true
 			backupBoard = deepCopy(board);
@@ -77,56 +78,67 @@ public class Board {
 			return false;
 		}
 	}
-	
+
 	public Integer getValue(int x, int  y){
 		return board[y][x];
 	}
-	
+
 	public boolean validate(){
 
-		return verifyColumns() && verifyRows() && verifyBoxes();
+		return verifyColumns().size()==0 && verifyRows().size()==0 && verifyBoxes().size()==0;
 	}
 
-	private boolean verifyBoxes() {
-		
+	private Set<Coord> verifyBoxes() {
+
+		Set<Coord> set = new HashSet<>();
+
 		//Loop through the boxes.
 		for(int x = 0; x<9; x=x+3){
 			for(int y = 0; y<9; y=y+3){
-				
+
 				Integer[][] box = getBox(x, y);
-				Set<Integer> set = new HashSet<>();
-				
-				//This count refers to the number of non-null values in the box.
-				int count = 0;
-				
-				//go through each number in the box.
+
+				List<Integer> list = new ArrayList<>();
+				//go through each number in the box, convert it into an list.			
+				//If I didn't care about what the duplicates were, I could use a faster algorithm.... :(
 				for(int i = 0; i<3; i++){
 					for(int j = 0; j<3; j++){
-						
-						Integer num = box[i][j];
-						
-						//If a num is null skip it. If its not, add it to the set.
-						//sets ignore duplicate numbers.
-						if(num!=null){
-							count++;
-							set.add(box[i][j]);
-						}
+
+						list.add(box[i][j]);
 					}
 				}
-				
-				//If we have the same number of numbers as our set size, that means
-				//that each number only appeared once, so its valid. Otherwise there's
-				//a duplicate.
-				if(count != set.size()){
-					return false;
+
+				//Now that I have a row, check it the same way I check other rows.
+				for(int num = 1; num<10; num++){
+
+					//Locate the duplicate if there is one
+					if(list.contains(num) && (list.lastIndexOf(num) != list.indexOf(num))){
+
+						//Since there's a duplicate, we have to grab every number and get the coordinates
+						for(int index = 0; index<9; index++){
+							if(list.get(index)!=null && list.get(index)==num){
+
+								//calculate the indexes
+								int indexy1 = index/3+y;
+								int indexx1 = index%3+x;
+
+								//store
+								set.add(new Coord(indexx1,indexy1));
+							}
+						}
+
+					}
 				}
+
 			}
 		}
-		
-		return true;
+		return set;
 	}
 
-	private boolean verifyRows() {
+
+	private Set<Coord> verifyRows() {
+
+		Set<Coord> set = new HashSet<>();
 
 		for(int i = 0; i<8; i++){
 			Integer[] row = getRow(i);
@@ -135,19 +147,31 @@ public class Board {
 			//If the row has the number, and it has more than one copy of it,
 			//the row is invalid. We do this by making sure the index of a number
 			//going one way is the same as the index coming from the other way.
-			for(int j = 1; j<10; j++){
-				
-				if(list.contains(j) && (list.lastIndexOf(j) != list.indexOf(j))){
-					return false;
+			for(int val = 1; val<10; val++){
+
+				//Do we have a duplicate?
+				if(list.contains(val) && (list.lastIndexOf(val) != list.indexOf(val))){
+
+					//We do. So go through and find all traces of that number and store it.
+					for(int index = 0; index<9; index++){
+
+						//If we have the value, store it.
+						if(list.get(index)!=null && list.get(index)==val){
+							set.add(new Coord(index,i));
+						}
+					}
+
 				}
 			}
 
 		}
-		return true;
+		return set;
 	}
 
-	private boolean verifyColumns() {
-		
+	private Set<Coord> verifyColumns() {
+
+		Set<Coord> set = new HashSet<>();
+
 		for(int i = 0; i<8; i++){
 			Integer[] col = getColumn(i);
 			List<Integer> list = Arrays.asList(col);
@@ -155,15 +179,24 @@ public class Board {
 			//If the col has the number, and it has more than one copy of it,
 			//the col is invalid. We do this by making sure the index of a number
 			//going one way is the same as the index coming from the other way.
-			for(int j = 1; j<10; j++){
-				
-				if(list.contains(j) && (list.lastIndexOf(j) != list.indexOf(j))){
-					return false;
+			for(int val = 1; val<10; val++){
+
+				if(list.contains(val) && (list.lastIndexOf(val) != list.indexOf(val))){
+
+					//We do. So go through and find all traces of that number and store it.
+					for(int index = 0; index<9; index++){
+
+						//If we have the value, store it.
+						if(list.get(index)!=null && list.get(index)==val){
+							set.add(new Coord(i,index));
+						}
+					}
+
 				}
 			}
 
 		}
-		return true;
+		return set;
 	}
 
 	/**
@@ -329,9 +362,9 @@ public class Board {
 
 	@Override
 	public String toString(){
-		
+
 		StringBuilder builder = new StringBuilder();
-		
+
 		for(int i = 0; i<9; i++){
 			if(i!=0){
 				builder.append("\n");
@@ -341,25 +374,25 @@ public class Board {
 			}
 
 			for(int j = 0; j<9; j++){
-				
+
 				if(j%3==0){
 					builder.append("   ");
 				}
-				
+
 				if(board[i][j]!=null){
 					builder.append("{"+board[i][j]+"}");
 				}
 				else{
 					builder.append("{ }");
 				}
-				
+
 				if(j!=8 && j!=2 && j!=5){
 					builder.append(",");
 				}
 			}
 
 		}
-		
+
 		return builder.toString();
 	}
 
@@ -379,59 +412,59 @@ public class Board {
 		}
 		return false;
 	}
-	
+
 	protected static Integer[][] deepCopy(Integer[][] board){
 		Integer[][] output = new Integer[9][9];
-		
+
 		for(int i = 0; i<9; i++){
 			for(int j = 0; j<9; j++){
 				output[i][j] = board[i][j];
 			}
 		}
-		
+
 		return output;
 	}
-	
+
 	protected static boolean[][] deepCopy(boolean[][] board){
 		boolean[][] output = new boolean[9][9];
-		
+
 		for(int i = 0; i<9; i++){
 			for(int j = 0; j<9; j++){
 				output[i][j] = board[i][j];
 			}
 		}
-		
+
 		return output;
 	}
-	
+
 	public Board makeCopy(){
-		
+
 		Integer[][] newBoard = deepCopy(board);
 		boolean[][] editBoard = deepCopy(editable);
-		
+
 		return new Board(newBoard, editBoard);
-		
+
 	}
 
 	public int getSpacesLeft() {
 		int count = 0;
-		
+
 		for(int i = 0; i<9; i++){
 			for(int j = 0; j<9; j++){
-				
+
 				if(getValue(i,j)==null){
 					count++;
 				}
 			}
 		}
 		return count;
-		
+
 	}
 
 	public String getEditableBoxAsString() {
-		
+
 		StringBuilder builder = new StringBuilder();
-		
+
 		for(int i = 0; i<9; i++){
 			if(i!=0){
 				builder.append("\n");
@@ -441,55 +474,65 @@ public class Board {
 			}
 
 			for(int j = 0; j<9; j++){
-				
+
 				if(j%3==0){
 					builder.append("   ");
 				}
-				
+
 				builder.append("{"+editable[i][j]+"}");
-				
+
 				if(j!=8 && j!=2 && j!=5){
 					builder.append(",");
 				}
 			}
 
 		}
-		
+
 		return builder.toString();
 	}
-	
+
 	@Override
 	public int hashCode(){
-		
+
 		return Arrays.deepHashCode(board)*2 + Arrays.deepHashCode(backupBoard)*3 + Arrays.deepHashCode(editable)*5;
-		
+
 	}
-	
+
 	@Override
 	public boolean equals(Object obj){
-		
+
 		if (this.getClass()!= obj.getClass()){
 			return false;
 		}
-		
+
 		if(this.hashCode()!=obj.hashCode()){
-//			return false;
+			//			return false;
 		}
-		
+
 		Board otherBoard = (Board) obj;
-		
+
 		//Check contents
 		if(this.toString().equals(otherBoard.toString()) &&
-			this.getEditableBoxAsString().equals(otherBoard.getEditableBoxAsString())) {
+				this.getEditableBoxAsString().equals(otherBoard.getEditableBoxAsString())) {
 			return true;
 		}
-		
+
 		return false;
 
 	}
 
 	public boolean isEditable(int x, int y) {
 		return editable[y][x];
-		
+
+	}
+
+	public Set<Coord> findInvalids() {
+
+		Set<Coord> set = new HashSet<>();
+
+		set.addAll(verifyColumns());
+		set.addAll(verifyRows());
+		set.addAll(verifyBoxes());
+		return set;
 	}
 }
