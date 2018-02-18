@@ -47,9 +47,9 @@ public class MainUI {
 	private Button loadButton;
 
 	private Stage stage;
-	
+
 	private Mode mode = Mode.ENABLED; 
-	
+
 	enum Mode{
 		DISABLED,
 		ENABLED;
@@ -57,24 +57,24 @@ public class MainUI {
 
 	@FXML
 	void checkMyValuesButtonPressed(ActionEvent event) {
-		
+
 		Board board = getBoardFromUI();
 		Set<Coord> vals = board.findInvalids();
-		
+
 		for(Coord val : vals){
 			TextArea area = (TextArea) root.lookup("#box"+val.getY()+val.getX());
-			 area.setStyle( "-fx-background-color: red" );
+			area.setStyle( "-fx-background-color: red" );
 		}
-		
+
 	}
-	
+
 	void solve(ActionEvent event) {
 		Board board = getBoardFromUI();
-		
+
 		Solver solver = new Solver();
-		
+
 		boolean result = solver.solve(board);
-		
+
 		//If we solve it, load it.
 		if(result){
 			loadData(board);
@@ -86,14 +86,14 @@ public class MainUI {
 
 	@FXML
 	void chooseANewPuzzlePressed(ActionEvent event) {
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Open Puzzle file");
-			fileChooser.setInitialDirectory(new File("./puzzles/"));
-			File file = fileChooser.showOpenDialog(stage);
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Puzzle file");
+		fileChooser.setInitialDirectory(new File("./puzzles/"));
+		File file = fileChooser.showOpenDialog(stage);
 
-			BoardReader reader = new BoardReader(file);
-			Board board = reader.read();
-			loadData(board);
+		BoardReader reader = new BoardReader(file);
+		Board board = reader.read();
+		loadData(board);
 	}
 
 	@FXML
@@ -124,20 +124,20 @@ public class MainUI {
 			System.out.println("File was null");
 			return;
 		}
-		
+
 		BoardWriter writer = new BoardWriter(file);
 		Board board = getBoardFromUI();
-		
+
 		try {
 			writer.writeBoard(board, false);
 		} catch (IOException e) {
-	        Alert alert = new Alert(AlertType.ERROR);
-	        alert.setTitle("Error: Could Not Write File");
-	        alert.setHeaderText("The session file could not be saved at "+ file.toString()+".");
-	        alert.setContentText("The session file could not be saved at "+ file.toString()+". It already exists and is write-protected.");
-	        alert.showAndWait();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error: Could Not Write File");
+			alert.setHeaderText("The session file could not be saved at "+ file.toString()+".");
+			alert.setContentText("The session file could not be saved at "+ file.toString()+". It already exists and is write-protected.");
+			alert.showAndWait();
 		}
-		
+
 	}
 
 	/**
@@ -145,28 +145,28 @@ public class MainUI {
 	 * @return
 	 */
 	private Board getBoardFromUI() {
-		
+
 		Integer[][] data = new Integer[9][9];
 		boolean[][] edit = new boolean[9][9];
-		
+
 		for(int y = 0; y<9; y++){
 			for(int x = 0; x<9; x++){
 
 				TextArea area = (TextArea) root.lookup("#box"+y+x);
 
 				String val = area.getText();
-				
+
 				if(val==null || val.isEmpty()){
 					data[y][x] = null;
 				}
 				else{
 					data[y][x] = Integer.valueOf(val);
 				}
-				
+
 				edit[y][x] = area.isEditable();
 			}
 		}
-		
+
 		return new Board(data, edit);
 	}
 
@@ -174,17 +174,17 @@ public class MainUI {
 		this.stage = stage;
 		setupFormatters();
 	}
-	
+
 	public void setupFormatters(){
 
 		Pattern p = Pattern.compile("^(?:[1-9])$|");
-		
+
 		for(int y = 0; y<9; y++){
 			for(int x = 0; x<9; x++){
 
 				TextArea area = (TextArea) root.lookup("#box"+y+x);
 				area.setTextFormatter(new TextFormatter<String>((Change change) -> {
-					
+
 					String newText = change.getControlNewText();
 					Matcher m = p.matcher(newText);
 
@@ -194,6 +194,19 @@ public class MainUI {
 						return change ;
 					}
 				}));
+
+				//Set up listener so if one area is clicked, grab all of them and set their border to grey.
+				area.setOnMouseClicked(e->{
+
+					for(int yy = 0; yy<9; yy++){
+						for(int xx = 0; xx<9; xx++){
+
+							TextArea area2 = (TextArea) root.lookup("#box"+yy+xx);
+							area2.setStyle( "-fx-background-color: grey" );
+						}
+					}
+
+				});
 			}
 		}
 	}
