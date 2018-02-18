@@ -2,7 +2,6 @@ package ui;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,13 +45,47 @@ public class MainUI {
 	@FXML
 	private Button loadButton;
 
+	@FXML
+	private Button startButton;
+
+	@FXML
+	private Button pauseButton;
+
 	private Stage stage;
 
-	private Mode mode = Mode.ENABLED; 
+	private double time = 0.0;
 
-	enum Mode{
-		DISABLED,
-		ENABLED;
+	public void initialize(){
+
+		disableTheBoard();
+		startButton.setDisable(true);
+		pauseButton.setDisable(true);
+		hintButton.setDisable(true);
+		checkButton.setDisable(true);
+	}
+
+	private void disableTheBoard() {
+
+		for(int yy = 0; yy<9; yy++){
+			for(int xx = 0; xx<9; xx++){
+
+				TextArea area2 = (TextArea) root.lookup("#box"+yy+xx);
+				area2.setDisable(true);
+			}
+		}
+
+	}
+
+	private void enableTheBoard() {
+
+		for(int yy = 0; yy<9; yy++){
+			for(int xx = 0; xx<9; xx++){
+
+				TextArea area2 = (TextArea) root.lookup("#box"+yy+xx);
+				area2.setDisable(false);
+			}
+		}
+
 	}
 
 	@FXML
@@ -61,11 +94,42 @@ public class MainUI {
 		Board board = getBoardFromUI();
 		Set<Coord> vals = board.findInvalids();
 
-		for(Coord val : vals){
-			TextArea area = (TextArea) root.lookup("#box"+val.getY()+val.getX());
-			area.setStyle( "-fx-background-color: red" );
-		}
+		if(vals.isEmpty() && board.getSpacesLeft()==0){
+			startButton.setDisable(true);
+			hintButton.setDisable(true);
+			pauseButton.setDisable(true);
+			checkButton.setDisable(true);
 
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Sudoku Completed!");
+			alert.setHeaderText("The sudoku has been completed.");
+			alert.setContentText("You have successfully completed the sudoku. Your time was "+ time +" seconds");
+			alert.showAndWait();
+		}
+		else{
+			for(Coord val : vals){
+				TextArea area = (TextArea) root.lookup("#box"+val.getY()+val.getX());
+				area.setStyle( "-fx-background-color: red" );
+			}
+		}
+	}
+
+	@FXML
+	void startButtonPressed(ActionEvent event) {
+		enableTheBoard();
+		hintButton.setDisable(false);
+		checkButton.setDisable(false);
+		startButton.setDisable(true);
+		pauseButton.setDisable(false);
+	}
+
+	@FXML
+	void pauseButtonPressed(ActionEvent event) {
+		disableTheBoard();
+		hintButton.setDisable(true);
+		checkButton.setDisable(true);
+		startButton.setDisable(false);
+		pauseButton.setDisable(true);
 	}
 
 	void solve(ActionEvent event) {
@@ -82,6 +146,7 @@ public class MainUI {
 		else{ //Otherwise, find out what's wrong and tell the user.
 			checkMyValuesButtonPressed(null);
 		}
+
 	}
 
 	@FXML
@@ -91,9 +156,19 @@ public class MainUI {
 		fileChooser.setInitialDirectory(new File("./puzzles/"));
 		File file = fileChooser.showOpenDialog(stage);
 
-		BoardReader reader = new BoardReader(file);
-		Board board = reader.read();
-		loadData(board);
+		if(file!=null && file.exists()){
+			hintButton.setDisable(true);
+			checkButton.setDisable(true);
+			pauseButton.setDisable(true);
+
+		}
+		else{
+			BoardReader reader = new BoardReader(file);
+			Board board = reader.read();
+			loadData(board);
+
+			startButton.setDisable(false);
+		}
 	}
 
 	@FXML
@@ -108,13 +183,27 @@ public class MainUI {
 		fileChooser.setInitialDirectory(new File("./session/"));
 		File file = fileChooser.showOpenDialog(stage);
 
-		BoardReader reader = new BoardReader(file);
-		Board board = reader.read();
-		loadData(board);
+		if(file!=null && file.exists()){
+			hintButton.setDisable(true);
+			checkButton.setDisable(true);
+			pauseButton.setDisable(true);
+
+		}
+		else{
+
+			BoardReader reader = new BoardReader(file);
+			Board board = reader.read();
+			loadData(board);
+
+			startButton.setDisable(false);
+		}
 	}
 
 	@FXML
 	void saveButtonPressed(ActionEvent event) {
+
+		disableTheBoard();
+
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save Session file");
 		fileChooser.setInitialDirectory(new File("./session/"));
