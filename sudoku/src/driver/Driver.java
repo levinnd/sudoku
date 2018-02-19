@@ -25,7 +25,6 @@ public class Driver extends Application {
 		stage.setTitle("FXML Welcome");
 		stage.setScene(new Scene(root));
 		stage.show();
-		stage.sizeToScene();
         stage.setMinWidth(stage.getWidth());
         stage.setMinHeight(stage.getHeight());
 		
