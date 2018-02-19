@@ -12,11 +12,6 @@ import com.google.common.base.Stopwatch;
 import io.BoardReader;
 import io.BoardWriter;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -62,11 +57,16 @@ public class MainUI {
 	private Button pauseButton;
 
 	@FXML
+	private Button solveButton;
+	
+	@FXML
 	private Label timeLabel;
 
 	private Stage stage;
 
 	private Stopwatch watch;
+
+	private boolean updateTimer = true;
 
 	public void initialize(Stage stage){
 		this.stage = stage;
@@ -77,8 +77,10 @@ public class MainUI {
 		pauseButton.setDisable(true);
 		hintButton.setDisable(true);
 		checkButton.setDisable(true);
+		solveButton.setDisable(true);
 
 		watch = Stopwatch.createUnstarted();
+		updateTimer = true;
 		
 		timeLabel.setText("0");
 
@@ -147,10 +149,12 @@ public class MainUI {
 		checkButton.setDisable(false);
 		startButton.setDisable(true);
 		pauseButton.setDisable(false);
+		solveButton.setDisable(false);
 	}
 
 	private void startTimer() {
 		if(!watch.isRunning()){
+			updateTimer = true;
 			watch.start();
 
 			Runner runner = new Runner();
@@ -174,9 +178,9 @@ public class MainUI {
 
 					@Override
 					public void run() {
-
-						timeLabel.setText(String.valueOf(watch.elapsed(TimeUnit.SECONDS)));
-
+						if(updateTimer){
+							timeLabel.setText(String.valueOf(watch.elapsed(TimeUnit.SECONDS)));
+						}
 					}
 
 				});
@@ -193,15 +197,21 @@ public class MainUI {
 		checkButton.setDisable(true);
 		startButton.setDisable(false);
 		pauseButton.setDisable(true);
+		solveButton.setDisable(true);
 	}
 
 	private void stopTimer() {
 		if(watch.isRunning()){
 			watch.stop();
+			updateTimer = false;
 		}
 	}
 
-	void solve(ActionEvent event) {
+	@FXML
+	void solveButtonPressed(ActionEvent event) {
+		
+		pauseButtonPressed(null);
+		
 		Board board = getBoardFromUI();
 
 		Solver solver = new Solver();
@@ -210,10 +220,17 @@ public class MainUI {
 
 		//If we solve it, load it.
 		if(result){
-			loadData(board);
+			loadData(solver.getSolvedBoard());
+			stopTimer();
+			timeLabel.setText("N/A");
+			this.checkMyValuesButtonPressed(null);
+			enableTheBoard();
 		}
-		else{ //Otherwise, find out what's wrong and tell the user.
-			checkMyValuesButtonPressed(null);
+		else{ //Otherwise, tell the user we cannot solve it.
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Unsolveable Puzzle");
+			alert.setContentText("The puzzle is unsolveable");
+			alert.showAndWait();
 		}
 
 	}
@@ -221,11 +238,14 @@ public class MainUI {
 	@FXML
 	void chooseANewPuzzlePressed(ActionEvent event) {
 
-		pauseButtonPressed(null);
-		
 		boolean startButtonState = startButton.isDisabled();
 		boolean pauseButtonState = pauseButton.isDisabled();
+		boolean solveButtonState = solveButton.isDisabled();
+		
+		pauseButtonPressed(null);
 
+		startButton.setDisable(true);
+		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Puzzle file");
 		fileChooser.setInitialDirectory(new File("./puzzles/"));
@@ -248,6 +268,7 @@ public class MainUI {
 		else{
 			startButton.setDisable(startButtonState);
 			pauseButton.setDisable(pauseButtonState);
+			solveButton.setDisable(solveButtonState);
 		}
 
 	}
@@ -264,6 +285,7 @@ public class MainUI {
 		
 		boolean startButtonState = startButton.isDisabled();
 		boolean pauseButtonState = pauseButton.isDisabled();
+		boolean solveButtonState = solveButton.isDisabled();
 
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Session file");
@@ -290,6 +312,7 @@ public class MainUI {
 		else{
 			startButton.setDisable(startButtonState);
 			pauseButton.setDisable(pauseButtonState);
+			solveButton.setDisable(solveButtonState);
 		}
 	}
 

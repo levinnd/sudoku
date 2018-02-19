@@ -22,7 +22,7 @@ public class Driver extends Application {
 		Parent root = loader.load();
 		controller = loader.getController();
 		
-		stage.setTitle("FXML Welcome");
+		stage.setTitle("Sudoku Master");
 		stage.setScene(new Scene(root));
 		stage.show();
         stage.setMinWidth(stage.getWidth());

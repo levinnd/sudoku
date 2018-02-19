@@ -267,6 +267,7 @@
                     </rowConstraints>
                      <children>
                         <Button fx:id="hintButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#hintButtonPressed" prefHeight="48.0" prefWidth="130.0" text="Hint" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                              <Button fx:id="solveButton" mnemonicParsing="false" onAction="#solveButtonPressed" prefHeight="55.0" prefWidth="139.0" text="Solve" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <GridPane GridPane.columnIndex="4" GridPane.rowIndex="2">
