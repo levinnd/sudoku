@@ -3,16 +3,26 @@ package ui;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.common.base.Stopwatch;
+
 import io.BoardReader;
 import io.BoardWriter;
+import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
@@ -51,18 +61,30 @@ public class MainUI {
 	@FXML
 	private Button pauseButton;
 
+	@FXML
+	private Label timeLabel;
+
 	private Stage stage;
 
-	private double time = 0.0;
+	private Stopwatch watch;
 
-	public void initialize(){
+	public void initialize(Stage stage){
+		this.stage = stage;
+		setupFormatters();
 
 		disableTheBoard();
 		startButton.setDisable(true);
 		pauseButton.setDisable(true);
 		hintButton.setDisable(true);
 		checkButton.setDisable(true);
+
+		watch = Stopwatch.createUnstarted();
+		
+		timeLabel.setText("0");
+
+
 	}
+
 
 	private void disableTheBoard() {
 
@@ -99,11 +121,12 @@ public class MainUI {
 			hintButton.setDisable(true);
 			pauseButton.setDisable(true);
 			checkButton.setDisable(true);
+			stopTimer();
 
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Sudoku Completed!");
 			alert.setHeaderText("The sudoku has been completed.");
-			alert.setContentText("You have successfully completed the sudoku. Your time was "+ time +" seconds");
+			alert.setContentText("You have successfully completed the sudoku. Your time was "+ watch.elapsed(TimeUnit.SECONDS) +" seconds");
 			alert.showAndWait();
 		}
 		else{
@@ -116,6 +139,9 @@ public class MainUI {
 
 	@FXML
 	void startButtonPressed(ActionEvent event) {
+
+		startTimer();
+
 		enableTheBoard();
 		hintButton.setDisable(false);
 		checkButton.setDisable(false);
@@ -123,13 +149,56 @@ public class MainUI {
 		pauseButton.setDisable(false);
 	}
 
+	private void startTimer() {
+		if(!watch.isRunning()){
+			watch.start();
+
+			Runner runner = new Runner();
+			runner.start();
+		}
+	}
+
+	class Runner extends Thread{
+		
+		@Override
+		public void run() {
+			while(watch.isRunning()){
+				
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+
+						timeLabel.setText(String.valueOf(watch.elapsed(TimeUnit.SECONDS)));
+
+					}
+
+				});
+			}
+		}
+	}
+	
 	@FXML
 	void pauseButtonPressed(ActionEvent event) {
+
+		stopTimer();
 		disableTheBoard();
 		hintButton.setDisable(true);
 		checkButton.setDisable(true);
 		startButton.setDisable(false);
 		pauseButton.setDisable(true);
+	}
+
+	private void stopTimer() {
+		if(watch.isRunning()){
+			watch.stop();
+		}
 	}
 
 	void solve(ActionEvent event) {
@@ -151,6 +220,12 @@ public class MainUI {
 
 	@FXML
 	void chooseANewPuzzlePressed(ActionEvent event) {
+
+		pauseButtonPressed(null);
+		
+		boolean startButtonState = startButton.isDisabled();
+		boolean pauseButtonState = pauseButton.isDisabled();
+
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Puzzle file");
 		fileChooser.setInitialDirectory(new File("./puzzles/"));
@@ -161,14 +236,20 @@ public class MainUI {
 			checkButton.setDisable(true);
 			pauseButton.setDisable(true);
 
-		}
-		else{
 			BoardReader reader = new BoardReader(file);
 			Board board = reader.read();
 			loadData(board);
 
 			startButton.setDisable(false);
+			watch = Stopwatch.createUnstarted();
+			timeLabel.setText("0");
+
 		}
+		else{
+			startButton.setDisable(startButtonState);
+			pauseButton.setDisable(pauseButtonState);
+		}
+
 	}
 
 	@FXML
@@ -178,29 +259,44 @@ public class MainUI {
 
 	@FXML
 	void loadButtonPressed(ActionEvent event) {
+
+		pauseButtonPressed(null);
+		
+		boolean startButtonState = startButton.isDisabled();
+		boolean pauseButtonState = pauseButton.isDisabled();
+
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Session file");
 		fileChooser.setInitialDirectory(new File("./session/"));
 		File file = fileChooser.showOpenDialog(stage);
 
 		if(file!=null && file.exists()){
+
 			hintButton.setDisable(true);
 			checkButton.setDisable(true);
 			pauseButton.setDisable(true);
-
-		}
-		else{
 
 			BoardReader reader = new BoardReader(file);
 			Board board = reader.read();
 			loadData(board);
 
 			startButton.setDisable(false);
+
+			watch = Stopwatch.createUnstarted();
+			timeLabel.setText("0");
+			
+
+		}
+		else{
+			startButton.setDisable(startButtonState);
+			pauseButton.setDisable(pauseButtonState);
 		}
 	}
 
 	@FXML
 	void saveButtonPressed(ActionEvent event) {
+
+		pauseButtonPressed(null);
 
 		disableTheBoard();
 
@@ -257,11 +353,6 @@ public class MainUI {
 		}
 
 		return new Board(data, edit);
-	}
-
-	public void initialize(Stage stage){
-		this.stage = stage;
-		setupFormatters();
 	}
 
 	public void setupFormatters(){
