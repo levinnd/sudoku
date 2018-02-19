@@ -23,8 +23,11 @@ public class Driver extends Application {
 		controller = loader.getController();
 		
 		stage.setTitle("FXML Welcome");
-		stage.setScene(new Scene(root, 300, 275));
+		stage.setScene(new Scene(root));
 		stage.show();
+		stage.sizeToScene();
+        stage.setMinWidth(stage.getWidth());
+        stage.setMinHeight(stage.getHeight());
 		
 		controller.initialize(stage);
 	}

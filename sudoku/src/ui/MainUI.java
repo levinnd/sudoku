@@ -351,7 +351,7 @@ public class MainUI {
 				edit[y][x] = area.isEditable();
 			}
 		}
-
+ 
 		return new Board(data, edit);
 	}
 
@@ -363,8 +363,9 @@ public class MainUI {
 			for(int x = 0; x<9; x++){
 
 				TextArea area = (TextArea) root.lookup("#box"+y+x);
+				area.setStyle("-fx-text-alignment: center");
 				area.setTextFormatter(new TextFormatter<String>((Change change) -> {
-
+					
 					String newText = change.getControlNewText();
 					Matcher m = p.matcher(newText);
 
