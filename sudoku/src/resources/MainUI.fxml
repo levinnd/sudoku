@@ -292,7 +292,7 @@
                   </Label>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="98.0" prefWidth="641.0" text="SUDOKU" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                      <font>
-                        <Font name="Playbill" size="48.0" />
+                         <Font size="48.0" />
                      </font>
                   </Label>
                         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
