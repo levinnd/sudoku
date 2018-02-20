@@ -290,7 +290,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label contentDisplay="RIGHT" prefHeight="98.0" prefWidth="186.0" text="SUDOKU" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="98.0" prefWidth="641.0" text="SUDOKU" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                      <font>
                         <Font name="Playbill" size="96.0" />
                      </font>
