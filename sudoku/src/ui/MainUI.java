@@ -248,6 +248,8 @@ public class MainUI {
 		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Puzzle file");
+		System.out.println(new File(System.getProperty("user.dir")+"/puzzles/").toString());
+		System.out.println(new File("./puzzles/").getAbsolutePath());
 		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")+"/puzzles/"));
 		File file = fileChooser.showOpenDialog(stage);
 
