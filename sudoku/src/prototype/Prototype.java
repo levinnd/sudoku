@@ -1,10 +1,10 @@
-package sampleGame;
+package prototype;
 
 import java.util.Scanner;
 
 import sudokuBoard.Board;
 
-public class SamplePlay {
+public class Prototype {
 
 	public static void main(String args[]){
 
