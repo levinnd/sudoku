@@ -248,7 +248,7 @@ public class MainUI {
 		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Puzzle file");
-		fileChooser.setInitialDirectory(new File("./puzzles/"));
+		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")+"/puzzles/"));
 		File file = fileChooser.showOpenDialog(stage);
 
 		if(file!=null && file.exists()){
@@ -289,7 +289,7 @@ public class MainUI {
 
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Session file");
-		fileChooser.setInitialDirectory(new File("./session/"));
+		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")+"/session/"));
 		File file = fileChooser.showOpenDialog(stage);
 
 		if(file!=null && file.exists()){
@@ -325,7 +325,7 @@ public class MainUI {
 
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save Session file");
-		fileChooser.setInitialDirectory(new File("./session/"));
+		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")+"/session/"));
 		File file = fileChooser.showSaveDialog(stage);
 
 		if(file==null){
