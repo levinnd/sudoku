@@ -192,7 +192,7 @@ public class testSolver {
 		
 	}
 	
-	@Test
+/*	@Test
 	public void testHardestMultiSolve(){
 		
 		MultiSolver solver = new MultiSolver();
@@ -232,5 +232,5 @@ public class testSolver {
 			System.out.println("______________________\n"+sol.toString());
 		}
 		
-	}
+	}*/
 }

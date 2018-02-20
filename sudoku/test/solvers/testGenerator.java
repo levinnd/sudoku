@@ -8,12 +8,12 @@ import solvers.Generator;
 
 public class testGenerator {
 
-	@Test
+	/*@Test
 	public void testGenerate(){
 		
 		Generator generator = new Generator();
 		
 		assertTrue(generator.getSolution().validate());
 		System.out.println(generator.getSolution().toString());
-	}
+	}*/
 }
