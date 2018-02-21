@@ -68,6 +68,8 @@ public class MainUI {
 
 	private boolean updateTimer = true;
 
+	private int initialTime = 0;
+
 	public void initialize(Stage stage){
 		this.stage = stage;
 		setupFormatters();
@@ -157,12 +159,19 @@ public class MainUI {
 			updateTimer = true;
 			watch.start();
 
-			Runner runner = new Runner();
+			Runner runner = new Runner(initialTime );
 			runner.start();
 		}
 	}
 
 	class Runner extends Thread{
+		
+		int currentTime = 0;
+		protected int initialTime;
+		
+		public Runner(int initialTime){
+			this.initialTime = initialTime;
+		}
 		
 		@Override
 		public void run() {
@@ -179,7 +188,14 @@ public class MainUI {
 					@Override
 					public void run() {
 						if(updateTimer){
-							timeLabel.setText(String.valueOf(watch.elapsed(TimeUnit.SECONDS)));
+							String time;
+							
+							if(!timeLabel.getText().equals("N/A") && (int)watch.elapsed(TimeUnit.SECONDS)!=currentTime){
+								currentTime = (int)watch.elapsed(TimeUnit.SECONDS);
+								time = (initialTime  + (int)watch.elapsed(TimeUnit.SECONDS))+"";
+								timeLabel.setText(time);
+							}
+							
 						}
 					}
 
@@ -225,6 +241,7 @@ public class MainUI {
 			timeLabel.setText("N/A");
 			this.checkMyValuesButtonPressed(null);
 			enableTheBoard();
+			saveButton.setDisable(true);
 		}
 		else{ //Otherwise, tell the user we cannot solve it.
 			Alert alert = new Alert(AlertType.WARNING);
@@ -238,18 +255,16 @@ public class MainUI {
 	@FXML
 	void chooseANewPuzzlePressed(ActionEvent event) {
 
+		pauseButtonPressed(null);
+		
 		boolean startButtonState = startButton.isDisabled();
 		boolean pauseButtonState = pauseButton.isDisabled();
 		boolean solveButtonState = solveButton.isDisabled();
-		
-		pauseButtonPressed(null);
 
 		startButton.setDisable(true);
 		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Puzzle file");
-		System.out.println(new File(System.getProperty("user.dir")+"/puzzles/").toString());
-		System.out.println(new File("./puzzles/").getAbsolutePath());
 		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")+"/puzzles/"));
 		File file = fileChooser.showOpenDialog(stage);
 
@@ -257,6 +272,7 @@ public class MainUI {
 			hintButton.setDisable(true);
 			checkButton.setDisable(true);
 			pauseButton.setDisable(true);
+			saveButton.setDisable(false);
 
 			BoardReader reader = new BoardReader(file);
 			Board board = reader.read();
@@ -264,7 +280,9 @@ public class MainUI {
 
 			startButton.setDisable(false);
 			watch = Stopwatch.createUnstarted();
+			watch.reset();
 			timeLabel.setText("0");
+			initialTime = 0;
 
 		}
 		else{
@@ -299,6 +317,7 @@ public class MainUI {
 			hintButton.setDisable(true);
 			checkButton.setDisable(true);
 			pauseButton.setDisable(true);
+			saveButton.setDisable(false);
 
 			BoardReader reader = new BoardReader(file);
 			Board board = reader.read();
@@ -307,7 +326,10 @@ public class MainUI {
 			startButton.setDisable(false);
 
 			watch = Stopwatch.createUnstarted();
-			timeLabel.setText("0");
+			watch.reset();
+
+			timeLabel.setText(board.getTime()+"");
+			initialTime = board.getTime();
 			
 
 		}
@@ -377,7 +399,9 @@ public class MainUI {
 			}
 		}
  
-		return new Board(data, edit);
+		Board board = new Board(data, edit);
+		board.setTime(Integer.parseInt(timeLabel.getText()));
+		return board;
 	}
 
 	public void setupFormatters(){
@@ -418,7 +442,7 @@ public class MainUI {
 	}
 
 	public void loadData(Board board){
-
+		
 		for(int y = 0; y<9; y++){
 			for(int x = 0; x<9; x++){
 

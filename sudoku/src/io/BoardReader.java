@@ -20,6 +20,7 @@ public class BoardReader {
 
 		Integer[][] data = new Integer[9][9];
 		boolean[][] edit = new boolean[9][9];
+		int time = 0;
 
 		Pattern p = Pattern.compile(".*?..*?..*?..*?.(.).*?.."
 				+ "*?..*?..*?(.).*?..*?..*?..*?(.).*?..*?.."
@@ -31,12 +32,19 @@ public class BoardReader {
 				+ "?(true|false).*?(true|false).*?(true|false).*?(true|false).*"
 				+ "?(true|false).*?(true|false).*",Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
+		Pattern p3 = Pattern.compile("^([0-9]+)$");
+		
 		try(Scanner scanner = new Scanner(file);){
 			int j = 0;
-
+			
 			while(scanner.hasNextLine() && j<9){
 				String line = scanner.nextLine();
-
+				
+				Matcher m3 = p3.matcher(line);
+				if(m3.matches()){
+					time = Integer.parseInt(m3.group(1));
+				}
+				
 				Matcher m = p.matcher(line);
 				if(m.matches()){
 
@@ -74,9 +82,10 @@ public class BoardReader {
 			e.printStackTrace();
 			throw new IllegalArgumentException("The passed in file does not exist!");
 		}
-
-
-		return new Board(data, edit);
+		
+		Board board = new Board(data, edit);
+		board.setTime(time);
+		return board;
 	}
 
 	public void setFile(File file) {

@@ -50,8 +50,9 @@ public class BoardWriter {
 		try(PrintWriter writer = new PrintWriter(file);) {
 		
 			if(protect){
-				writer.write("protect");
+				writer.write("protect\n");
 			}
+			writer.write(board.getTime()+"\n");
 			
 			writer.write(board.toString());
 			writer.write("\n&&\n");

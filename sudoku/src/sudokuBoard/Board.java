@@ -13,6 +13,8 @@ public class Board {
 	private Integer[][] backupBoard = new Integer[9][9];
 
 	private boolean [][] editable = new boolean[9][9];
+	
+	private int time = 0;
 
 	/**
 	 * Creates an empty board
@@ -513,7 +515,8 @@ public class Board {
 
 		//Check contents
 		if(this.toString().equals(otherBoard.toString()) &&
-				this.getEditableBoxAsString().equals(otherBoard.getEditableBoxAsString())) {
+				this.getEditableBoxAsString().equals(otherBoard.getEditableBoxAsString())
+				&& this.time == otherBoard.getTime()) {
 			return true;
 		}
 
@@ -535,4 +538,13 @@ public class Board {
 		set.addAll(verifyBoxes());
 		return set;
 	}
+	
+	public void setTime(int i){
+		this.time = i;
+	}
+	
+	public int getTime(){
+		return time;
+	}
+	
 }

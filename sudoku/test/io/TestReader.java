@@ -57,6 +57,10 @@ public class TestReader {
 		Board board = new Board(puzzle);
 		Board board2 = new Board(solution);
 		
+		board.setTime(3);
+		
+		board2.setTime(6);
+		
 		File file = new File("./test/data/board1.txt");
 		File file2 = new File("./test/data/board2.txt");
 		
@@ -70,11 +74,17 @@ public class TestReader {
 		
 		Board readBoard = reader.read();
 		
+		assertEquals(3, board.getTime());
+		assertEquals(3, readBoard.getTime());
+		
 		assertEquals(board, readBoard);
 		
 		reader.setFile(file2);
 		
 		Board readBoard2 = reader.read();
+		
+		assertEquals(6, board2.getTime());
+		assertEquals(6, readBoard2.getTime());
 		
 		assertEquals(board2, readBoard2);
 		
