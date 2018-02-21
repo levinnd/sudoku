@@ -242,6 +242,7 @@ public class MainUI {
 			this.checkMyValuesButtonPressed(null);
 			enableTheBoard();
 			saveButton.setDisable(true);
+			startButton.setDisable(true);
 		}
 		else{ //Otherwise, tell the user we cannot solve it.
 			Alert alert = new Alert(AlertType.WARNING);
@@ -400,7 +401,9 @@ public class MainUI {
 		}
  
 		Board board = new Board(data, edit);
-		board.setTime(Integer.parseInt(timeLabel.getText()));
+		if(!timeLabel.getText().equals("N/A")){
+			board.setTime(Integer.parseInt(timeLabel.getText()));
+		}
 		return board;
 	}
 
