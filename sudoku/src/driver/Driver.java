@@ -47,7 +47,7 @@ public class Driver extends Application {
 
 		controller = loader.getController();
 
-		stage.setTitle("Sudoku Master");
+		stage.setTitle("Commit Sudoku");
 		stage.setScene(new Scene(root));
 		stage.show();
 		stage.setMinWidth(stage.getWidth());
